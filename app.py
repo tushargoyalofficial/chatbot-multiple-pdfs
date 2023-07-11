@@ -2,7 +2,7 @@ import streamlit as st
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
+from langchain.embeddings import OpenAIEmbeddings, HuggingFaceInstructEmbeddings
 from langchain.vectorstores import FAISS
 
 def get_pdf_text(pdf_docs):
@@ -31,10 +31,15 @@ def using_openAI(text_chunks):
 
 # this one, again we are going to create embeddings but for free, using our machine
 # using instructor embeddings
+def using_huggingface_instruct(text_chunks):
+    embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
+    vectorstore = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
+    return vectorstore
 
 def get_vectorstore(text_chunks):
-    vector_openai = using_openAI(text_chunks)
-    return vector_openai
+    # vector_db = using_openAI(text_chunks)
+    vector_db = using_huggingface_instruct(text_chunks)
+    return vector_db
 
 def main():
     # loading variables inside .env file
