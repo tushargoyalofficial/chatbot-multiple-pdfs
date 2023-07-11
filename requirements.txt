@@ -5,3 +5,8 @@ python-dotenv
 faiss-cpu
 openai
 huggingface_hub
+tiktoken
+faiss-cpu
+numpy
+InstructorEmbedding
+sentence_transformers
