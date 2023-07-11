@@ -33,7 +33,7 @@ def using_openAI(text_chunks):
 # using instructor embeddings
 
 def get_vectorstore(text_chunks):
-    # vector_openai = using_openAI(text_chunks)
+    vector_openai = using_openAI(text_chunks)
     return vector_openai
 
 def main():
